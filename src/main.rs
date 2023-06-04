@@ -18,8 +18,8 @@ use map::*;
 mod player;
 use player::*;
 
-// mod enemy;
-// use enemy::*;
+mod enemy;
+use enemy::*;
 
 fn main() {
     App::new()
@@ -36,7 +36,7 @@ fn main() {
     .insert_resource(ClearColor(Color::rgb(92.0 / 255.0, 148.0 / 255.0, 252.0 / 255.0)))
     .add_startup_system(spawn_player)
     .add_startup_system(spawn_camera)
-    // .add_startup_system(spawn_enemies)
+    .add_startup_system(spawn_enemies)
     .add_startup_system(playback_audio)
     .add_startup_system(spawn_map)
     .add_startup_system(spawn_hud)
@@ -46,7 +46,8 @@ fn main() {
     .add_system(camera_track_player)
     .add_system(platform_detection)
     .add_system(player_jump)
-    // .add_system(enemy_movement)
+    .add_system(enemy_movement)
+    .add_system(enemy_plat_detection)
     .add_event::<CollisionEvent>()
     .run();    
 }
